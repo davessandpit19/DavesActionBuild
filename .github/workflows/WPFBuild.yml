@@ -4,26 +4,22 @@ on:
   push:
     branches: [ master, main ]
 
-# runs-on: [windows-latest]
-runs-on: [windows-2019]
-# runs-on: [windows-2022]
+jobs:
+    build:
+        steps:
+        - uses: actions/checkout@master
+        - uses: nuget/setup-nuget@v1
+          with:
+        #    nuget-api-key: ${{ secrets.NuGetAPIKey }}
+            nuget-version: '6.x'
 
-steps:
-- uses: actions/checkout@master
-- uses: nuget/setup-nuget@v1
-  with:
-#    nuget-api-key: ${{ secrets.NuGetAPIKey }}
-    nuget-version: '6.x'
+        - name: Restore nuget packages
+        - run: nuget restore TestingGithubActions.sln
 
-- name: Restore nuget packages
-- run: nuget restore TestingGithubActions.sln
+        - name: Add msbuild to PATH
+          uses: microsoft/setup-msbuild@v1.1
 
-
-
-- name: Add msbuild to PATH
-  uses: microsoft/setup-msbuild@v1.1
-
-- name: Build the solution
-  run: msbuild TestingGithubActions.sln -t:rebuild -verbosity:diag -property:Configuration=Debug
-#  run: msbuild src\TestingGithubActions.sln -t:rebuild -verbosity:diag -property:Configuration=Debug
+        - name: Build the solution
+          run: msbuild TestingGithubActions.sln -t:rebuild -verbosity:diag -property:Configuration=Debug
+        #  run: msbuild src\TestingGithubActions.sln -t:rebuild -verbosity:diag -property:Configuration=Debug
 
