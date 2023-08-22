@@ -7,16 +7,19 @@ on:
 jobs:
     build:
         steps:
-        - uses: nuget/setup-nuget@v1
+        - name: Get Nuget Tool
+          uses: nuget/setup-nuget@v1
           with:
             nuget-version: '6.x'
         #    nuget-api-key: ${{ secrets.NuGetAPIKey }}
 
         - name: Get Source Code
-        - uses: actions/checkout@main
+          uses: actions/checkout@v3
+          with:
+            ref: main
   
         - name: Restore nuget packages
-        - run: nuget restore TestingGithubActions.sln
+          run: nuget restore TestingGithubActions.sln
 
         - name: Add msbuild to PATH
           uses: microsoft/setup-msbuild@v1.1
