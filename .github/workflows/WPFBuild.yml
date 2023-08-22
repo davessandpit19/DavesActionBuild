@@ -2,17 +2,19 @@ name: WPF apps build
 
 on:
   push:
-    branches: [ master, main ]
+    branches: main
 
 jobs:
     build:
         steps:
-        - uses: actions/checkout@master
         - uses: nuget/setup-nuget@v1
           with:
-        #    nuget-api-key: ${{ secrets.NuGetAPIKey }}
             nuget-version: '6.x'
+        #    nuget-api-key: ${{ secrets.NuGetAPIKey }}
 
+        - name: Get Source Code
+        - uses: actions/checkout@main
+  
         - name: Restore nuget packages
         - run: nuget restore TestingGithubActions.sln
 
