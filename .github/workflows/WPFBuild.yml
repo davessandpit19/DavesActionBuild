@@ -31,3 +31,9 @@ jobs:
           run: msbuild TestingGithubActions\TestingGithubActions.sln -t:rebuild -verbosity:diag -property:Configuration=Debug
         #  run: msbuild src\TestingGithubActions.sln -t:rebuild -verbosity:diag -property:Configuration=Debug
 
+        - name: Push Artifacts back to Github
+          uses: actions/upload-artifact@v3
+          with:
+            name: TestingGithubActions App
+            path: TestingGithubActions\bin\Debug\
+
