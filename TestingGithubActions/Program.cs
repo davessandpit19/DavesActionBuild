@@ -11,7 +11,7 @@ namespace TestingGithubActions
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("look out!");
+            Console.WriteLine("look out! above!");
             Console.ReadLine();
         }
     }
