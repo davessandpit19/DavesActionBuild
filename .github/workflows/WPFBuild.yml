@@ -22,7 +22,7 @@ jobs:
             ref: main
   
         - name: Restore nuget packages
-          run: nuget restore TestingGithubActions.sln
+          run: nuget restore TestingGithubActions\TestingGithubActions.sln
 
         - name: Add msbuild to PATH
           uses: microsoft/setup-msbuild@v1.1
